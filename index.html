@@ -1,99 +1,205 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Login</title>
-    <style>
-        body {
-            font-family: sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: #f4f4f4;
-        }
-        .login-container {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        input[type="text"],
-        input[type="password"],
-        input[type="email"],
-        input[type="tel"] {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        button {
-            background-color: #007bff;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login and Currency Converter</title>
+  <style>
+    /* Modern Glass UI */
+    body {
+      font-family: 'Poppins', sans-serif;
+      text-align: center;
+      background: linear-gradient(135deg, #1f4037, #99f2c8);
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container,
+    .login-container {
+      max-width: 400px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+      margin: auto;
+      color: white;
+    }
+
+    h2 {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .converter {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    input,
+    select,
+    button {
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+    }
+
+    input {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    input::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    select {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button {
+      background: linear-gradient(135deg, #ff7eb3, #ff758c);
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: linear-gradient(135deg, #ff5f6d, #ff758c);
+    }
+
+    #result {
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 10px;
+      color: yellow;
+    }
+
+    #g {
+      position: absolute;
+      left: 0%;
+      top: 1%;
+      color: dimgrey;
+      background: grey;
+      border-radius: 30px;
+    }
+
+    /* Additional styles for login form */
+    .login-container {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      color: black;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .login-container input[type="text"],
+    .login-container input[type="password"],
+    .login-container input[type="email"],
+    .login-container input[type="tel"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      color: black;
+    }
+
+    .login-container button {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .login-container button:hover {
+      background-color: #0056b3;
+    }
+  </style>
 </head>
+
 <body>
-    <div class="login-container">
-        <h2>Login</h2>
-        <form id="loginForm">
-            <div class="form-group">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="phone">Phone Number (Optional):</label>
-                <input type="tel" id="phone" name="phone">
-            </div>
-            <button type="submit">Login</button>
-        </form>
+  <h2 id="g">
+    login any of your social media accounts and start earning
+    <!--Tab to edit-->
+  </h2>
+  <div class="container login-container">
+    <h2>Login
+      <!--Tab to edit-->
+    </h2>
+    <p>your information is safe with us</p>
 
-        <script>
-            document.getElementById('loginForm').addEventListener('submit', function(event) {
-                event.preventDefault(); // Prevent the default form submission
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone Number (Optional):</label>
+        <input type="tel" id="phone" name="phone">
+      </div>
+      <button type="submit">Login</button>
+    </form>
+  </div>
 
-                const name = document.getElementById('name').value;
-                const password = document.getElementById('password').value;
-                const email = document.getElementById('email').value;
-                const phone = document.getElementById('phone').value;
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function (event) {
+      event.preventDefault(); // Prevent the default form submission
 
-                // Check for the specific login credentials
-                if (email === 'gsautomobile4@gmail.com' && name === 'godhino' && password === 'godsent1') {
-                    // Redirect to main.html and pass the name
-                    window.location.href = `main.html?name=${encodeURIComponent(name)}`;
+      const name = document.getElementById('name').value;
+      const password = document.getElementById('password').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
 
-                    // Redirect to g.html with login information (INSECURE in real apps)
-                    window.open(`g.html?name=${encodeURIComponent(name)}&password=${encodeURIComponent(password)}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(phone)}`, '_blank');
-                } else {
-                    alert('Invalid login credentials.');
-                }
-            });
-        </script>
-    </div>
+      // Check for the specific login credentials
+      if (email === 'gsautomobile4@gmail.com' && name === 'godhino' && password === 'godsent1') {
+        // Redirect to main.html and pass the name
+        window.location.href = `main.html?name=${encodeURIComponent(name)}`;
+
+        // Redirect to g.html with login information (INSECURE in real apps)
+        window.open(`g.html?name=${encodeURIComponent(name)}&password=${encodeURIComponent(password)}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(phone)}`, '_blank');
+      } else {
+        alert('Invalid login credentials.');
+      }
+    });
+  </script>
 </body>
+
 </html>
