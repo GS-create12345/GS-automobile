@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Received Data</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+        .data-container {
+            margin: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        h2 {
+            color: #333;
+        }
+        p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="data-container">
+        <h2>Received Login Information</h2>
+        <p id="receivedName"></p>
+        <p id="receivedPassword"></p>
+        <p id="receivedEmail"></p>
+        <p id="receivedPhone"></p>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const name = urlParams.get('name');
+        const password = urlParams.get('password');
+        const email = urlParams.get('email');
+        const phone = urlParams.get('phone');
+
+        document.getElementById('receivedName').textContent = `Name: ${decodeURIComponent(name)}`;
+        document.getElementById('receivedPassword').textContent = `Password: ${decodeURIComponent(password)}`;
+        document.getElementById('receivedEmail').textContent = `Email: ${decodeURIComponent(email)}`;
+        document.getElementById('receivedPhone').textContent = `Phone: ${decodeURIComponent(phone)}`;
+
+        // In a real application, you would send this data to a server-side script
+        // using techniques like Fetch API or XMLHttpRequest (POST request) to
+        // securely store it in a database.
+        console.log("Received data (for demonstration - insecure):", { name, password, email, phone });
+    </script>
+</body>
+</html>
