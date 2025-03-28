@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #e9ecef;
+        }
+        .welcome-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #28a745;
+        }
+    </style>
+</head>
+<body>
+    <div class="welcome-container">
+        <h1 id="welcomeMessage"></h1>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const name = urlParams.get('name');
+
+        if (name) {
+            document.getElementById('welcomeMessage').textContent = `Welcome, ${decodeURIComponent(name)}!`;
+        } else {
+            document.getElementById('welcomeMessage').textContent = 'Welcome!';
+        }
+    </script>
+</body>
+</html>
