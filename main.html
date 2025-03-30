@@ -1,146 +1,271 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Welcome</title>
-    <style>
-        body {
-            font-family: sans-serif;
-            display: flex;
-            justify-content: top;
-            align-items: top;
-            min-height: 100vh;
-            background-color: #e9ecef;
-        }
-        .welcome-container {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            text-align: left, top;
-        }
-        h1 {
-            color: #28a745;
-        }
-    </style>
-</head>
-<body>
-    <div class="welcome-container">
-        <h1 id="welcomeMessage"></h1>
-    </div>
-<div>
-    
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Top Nav with Automatic Slider</title>
+    <title>My Awesome Game</title>
     <style>
-        nav {
-            background-color: #333;
-            color: white;
-            padding: 10px 0;
-            text-align: center;
+        /* Basic CSS for layout and theming - Expand this significantly */
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            background-color: #f0f0f0; /* Default theme background */
+            color: #333; /* Default theme text color */
         }
-
-        nav button {
-            background-color: #555;
+        .container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background-color: #eee;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+        nav li {
+            margin-left: 20px;
+        }
+        nav a {
+            text-decoration: none;
+            color: #555;
+            font-weight: bold;
+        }
+        main {
+            flex-grow: 1;
+            padding: 20px;
+        }
+        .page {
+            display: none; /* Initially hide all pages */
+        }
+        .page.active {
+            display: block; /* Show the active page */
+        }
+        #user-greeting {
+            font-weight: bold;
+        }
+        /* Theme styles will be added/modified by JavaScript */
+        .theme-dark {
+            background-color: #333;
+            color: #f0f0f0;
+        }
+        .theme-dark header, .theme-dark nav {
+            background-color: #222;
+        }
+        .theme-dark nav a {
+            color: #ddd;
+        }
+        /* Basic styling for form elements */
+        input[type="text"], input[type="password"], button {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #007bff;
             color: white;
-            border: none;
-            padding: 8px 15px;
             cursor: pointer;
         }
-
-        .slider-container {
-            display: none; /* Initially hidden */
-            position: fixed; /* Or absolute, depending on your layout */
-            top: 60px; /* Adjust based on your nav height */
-            left: 0;
-            width: 100%;
-            background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
-            padding: 20px;
-            box-sizing: border-box;
-            z-index: 1000; /* Ensure it's on top */
-            text-align: center; /* Center the slides */
+        button:hover {
+            background-color: #0056b3;
         }
-
-        .slider-container.active {
+        .settings-options label {
             display: block;
-        }
-
-        .slide {
-            display: none;
-            max-width: 80%;
-            margin: 0 auto;
-            color: white; /* Example slide content color */
-        }
-
-        .slide.active {
-            display: block;
+            margin-bottom: 5px;
         }
     </style>
 </head>
 <body>
+    <div class="container">
+        <header>
+            <h1>My Awesome Game</h1>
+            <span id="user-greeting"></span>
+            <nav>
+                <ul>
+                    <li><a href="#home" data-page="home">Home</a></li>
+                    <li><a href="#server" data-page="server">Server</a></li>
+                    <li><a href="#settings" data-page="settings">Settings</a></li>
+                    <li><a href="#game" data-page="game">Play</a></li>
+                    <li id="logout-link" style="display: none;"><a href="#logout" data-page="home">Logout</a></li>
+                    <li id="login-signup-link" style="display: block;"><a href="#login" data-page="login">Login/Signup</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <div id="home" class="page active">
+                <h2>Welcome to the Game!</h2>
+                <p>This is the home page. You can see news, announcements, etc. here.</p>
+            </div>
 
-    <nav>
-        <button id="toggleSlider">Show Slider</button>
-    </nav>
+            <div id="login" class="page">
+                <h2>Login / Signup</h2>
+                <div id="login-form">
+                    <h3>Login</h3>
+                    <input type="text" id="login-username" placeholder="Username" required>
+                    <input type="password" id="login-password" placeholder="Password" required>
+                    <button onclick="login()">Login</button>
+                </div>
+                <hr>
+                <div id="signup-form">
+                    <h3>Signup</h3>
+                    <input type="text" id="signup-username" placeholder="Username" required>
+                    <input type="password" id="signup-password" placeholder="Password" required>
+                    <button onclick="signup()">Signup</button>
+                </div>
+            </div>
 
-    <div class="slider-container" id="mySlider">
-        <div class="slide active">Slide 1 Content</div>
-        <div class="slide">Slide 2 Content</div>
-        <div class="slide">Slide 3 Content</div>
-        </div>
+            <div id="server" class="page">
+                <h2>Server Information</h2>
+                <div id="server-data">
+                    <p>Connecting to server...</p>
+                </div>
+            </div>
+
+            <div id="settings" class="page">
+                <h2>Settings</h2>
+                <div class="settings-options">
+                    <p>Logged in as: <span id="settings-username"></span></p>
+                    <label for="theme-select">Theme:</label>
+                    <select id="theme-select" onchange="changeTheme()">
+                        <option value="default">Default</option>
+                        <option value="dark">Dark</option>
+                        </select>
+                </div>
+            </div>
+
+            <div id="game" class="page">
+                <h2>Game Page</h2>
+                <p>This is where your game will be implemented.</p>
+                </div>
+        </main>
+    </div>
 
     <script>
-        const toggleSliderButton = document.getElementById('toggleSlider');
-        const sliderContainer = document.getElementById('mySlider');
-        const slides = document.querySelectorAll('.slide');
-        let currentIndex = 0;
-        let intervalId;
-        const slideInterval = 3000; // Time between slides in milliseconds
+        const pages = document.querySelectorAll('.page');
+        const navLinks = document.querySelectorAll('nav a');
+        const userGreeting = document.getElementById('user-greeting');
+        const settingsUsername = document.getElementById('settings-username');
+        const logoutLink = document.getElementById('logout-link');
+        const loginSignupLink = document.getElementById('login-signup-link');
+        const body = document.body;
+        const themeSelect = document.getElementById('theme-select');
+        const serverData = document.getElementById('server-data');
 
-        function showSlide(index) {
-            slides.forEach(slide => slide.classList.remove('active'));
-            slides[index].classList.add('active');
+        let currentUser = null; // Store the logged-in user
+
+        function showPage(pageId) {
+            pages.forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
         }
 
-        function nextSlide() {
-            currentIndex = (currentIndex + 1) % slides.length;
-            showSlide(currentIndex);
-        }
-
-        function startSlider() {
-            intervalId = setInterval(nextSlide, slideInterval);
-        }
-
-        function stopSlider() {
-            clearInterval(intervalId);
-        }
-
-        toggleSliderButton.addEventListener('click', () => {
-            sliderContainer.classList.toggle('active');
-            if (sliderContainer.classList.contains('active')) {
-                showSlide(currentIndex); // Show the initial slide
-                startSlider();
-            } else {
-                stopSlider(); // Stop the automatic sliding when closed
+        function navigateTo(event) {
+            event.preventDefault();
+            const pageId = this.getAttribute('data-page');
+            showPage(pageId);
+            if (pageId === 'server' && currentUser) {
+                fetchServerData(currentUser); // Example of fetching data on navigation
             }
+        }
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', navigateTo);
         });
 
-        // Optionally, hide the slider initially in JavaScript if you prefer
-        // sliderContainer.classList.remove('active');
-    </script>
-
-
-</div>
-    <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const name = urlParams.get('name');
-
-        if (name) {
-            document.getElementById('welcomeMessage').textContent = `Welcome, ${decodeURIComponent(name)}!`;
-        } else {
-            document.getElementById('welcomeMessage').textContent = 'Welcome!';
+        function updateUI() {
+            if (currentUser) {
+                userGreeting.textContent = `Welcome, ${currentUser.username}!`;
+                settingsUsername.textContent = currentUser.username;
+                logoutLink.style.display = 'block';
+                loginSignupLink.style.display = 'none';
+                showPage('home'); // Redirect to home after login
+            } else {
+                userGreeting.textContent = '';
+                settingsUsername.textContent = '';
+                logoutLink.style.display = 'none';
+                loginSignupLink.style.display = 'block';
+                showPage('login'); // Redirect to login if not logged in
+            }
         }
+
+        function login() {
+            const usernameInput = document.getElementById('login-username');
+            const passwordInput = document.getElementById('login-password');
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value;
+
+            // In a real application, you would send this data to a server for verification.
+            // For this example, we'll simulate a successful login.
+            if (username && password) {
+                currentUser = { username: username };
+                // Simulate sending user details to the server page (just updating UI here)
+                serverData.innerHTML = `<p>User logged in: ${currentUser.username}</p>`;
+                updateUI();
+                // Clear form
+                usernameInput.value = '';
+                passwordInput.value = '';
+            } else {
+                alert('Please enter both username and password.');
+            }
+        }
+
+        function signup() {
+            const usernameInput = document.getElementById('signup-username');
+            const passwordInput = document.getElementById('signup-password');
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value;
+
+            // In a real application, you would send this data to a server to create a new user.
+            // For this example, we'll simulate a successful signup.
+            if (username && password) {
+                currentUser = { username: username };
+                // Simulate sending user details to the server page (just updating UI here)
+                serverData.innerHTML = `<p>New user signed up: ${currentUser.username}</p>`;
+                updateUI();
+                // Clear form
+                usernameInput.value = '';
+                passwordInput.value = '';
+            } else {
+                alert('Please enter both username and password.');
+            }
+        }
+
+        document.getElementById('logout-link').addEventListener('click', (event) => {
+            event.preventDefault();
+            currentUser = null;
+            updateUI();
+            showPage('login');
+        });
+
+        function changeTheme() {
+            const selectedTheme = themeSelect.value;
+            body.classList.remove('theme-dark'); // Remove any existing theme classes
+            if (selectedTheme === 'dark') {
+                body.classList.add('theme-dark');
+            }
+            // You can add more theme logic here
+        }
+
+        function fetchServerData(user) {
+            // In a real application, you would make an AJAX request to your server here
+            // and update the serverData div with the response.
+            serverData.innerHTML = `<p>Fetching server data for user: ${user.username}...</p>`;
+            // Simulate a server response after a short delay
+            setTimeout(() => {
+                serverData.innerHTML = `<p>Server Status: Online</p><p>Active Users: 123</p><p>Welcome, ${user.username}!</p>`;
+            }, 1500);
+        }
+
+        // Initial setup: Show the login/signup page if no user is logged in
+        updateUI();
     </script>
 </body>
 </html>
